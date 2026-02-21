@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aureemas Electricals & Electronics | Inverters & Batteries</title>
+    <style>
+        /* --- General Styles --- */
+        :root {
+            --primary-color: #2E3192; /* Deep Blue from Logo */
+            --secondary-color: #ffc107; /* Amber/Gold */
+            --text-dark: #333;
+            --text-light: #f4f4f4;
+            --bg-light: #fff;
+            --bg-gray: #f9f9f9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 5px 0;
+            height: 90px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        header .container {
+            display: flex; 
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* --- LOGO AREA STYLES --- */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-area img {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .company-name {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .company-name h1 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .company-name span {
+            font-size: 0.9rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+            transition: 0.3s;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(46, 49, 146, 0.85), rgba(46, 49, 146, 0.85)), url('https://via.placeholder.com/1920x600?text=Electrical+Workshop+Background');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 0.5rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+
+        .btn {
+            background: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #e0a800; }
+
+        /* --- Sections General --- */
+        section { padding: 60px 0; }
+        .section-title { text-align: center; margin-bottom: 40px; }
+        .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 10px; }
+        .section-title span { display: block; width: 60px; height: 4px; background: var(--secondary-color); margin: auto; }
+
+        /* --- UPDATED: About Section Styles --- */
+        .about-content { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 50px; /* Increased gap for better spacing */
+            align-items: center; /* Vertically center items */
+        }
+        
+        .about-image { 
+            flex: 1; 
+            min-width: 300px; /* Ensures image doesn't get too small */
+        }
+        
+        .about-image img { 
+            width: 100%; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Softer shadow */
+        }
+
+        .about-text { 
+            flex: 1; 
+            min-width: 300px;
+        }
+
+        /* Style for the ISO Badge */
+        .iso-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: #fff;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            font-weight: 800;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+        .iso-badge:hover { transform: translateY(-3px); }
+        .iso-badge span { font-size: 1.6rem; } 
+
+        /* --- Products & Services --- */
+        .services { background: var(--bg-gray); }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--bg-light); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: var(--primary-color); margin-bottom: 15px; }
+        .icon { font-size: 3rem; color: var(--secondary-color); margin-bottom: 20px; display: block; }
+
+        /* --- Gallery --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        
+        .gallery-item img, 
+        .gallery-item video { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: cover; 
+            border-radius: 5px; 
+            transition: 0.3s; 
+            background: #000; 
+        }
+        .gallery-item img:hover { opacity: 0.8; }
+
+        /* --- Customers Section Styles --- */
+        .clients { background: var(--bg-gray); }
+        
+        .clients-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .client-box {
+            background: #fff;
+            width: 260px;
+            padding: 0; 
+            display: flex;
+            flex-direction: column;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e0e0e0;
+            transition: 0.3s;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .client-box:hover {
+            border-color: var(--secondary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .client-logo {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .client-name {
+            padding: 15px;
+            font-weight: bold;
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.3;
+            background: #fff;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* --- Contact --- */
+        .contact { 
+            background: var(--primary-color); 
+            color: var(--text-light); 
+            background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+        .contact h2 { color: var(--text-light); }
+        
+        .contact-container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 30px; 
+            text-align: center; 
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 30px 20px;
+            border-radius: 12px;
+            width: 300px; 
+            transition: 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px); 
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .contact-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-color); }
+        .contact-card p { font-size: 1rem; margin-bottom: 20px; color: #eee; }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .contact-btn:hover { background: var(--secondary-color); color: var(--text-dark); }
+
+        footer { background: #1a1c52; color: #ccc; text-align: center; padding: 20px 0; font-size: 0.9rem; }
+
+        /* --- Mobile Responsive --- */
+        @media (max-width: 768px) {
+            header { height: auto; padding: 15px 0; }
+            header .container { flex-direction: column; gap: 15px; }
+            .logo-area { flex-direction: column; text-align: center; gap: 5px; }
+            .logo-area img { height: 60px; }
+            .company-name h1 { font-size: 1.1rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+            .hero h1 { font-size: 2rem; }
+            /* About Section Stack on Mobile */
+            .about-content { flex-direction: column; }
+            .about-image, .about-text { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#home" class="logo-area">
+                <img src="Images/AUREEMASLOGO.JPG" alt="Aureemas Logo">
+                <div class="company-name">
+                    <h1>Aureemas Electricals<br>& Electronics</h1>
+                </div>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#clients">Clients</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div>
+            <h1>Powering Your World Reliably</h1>
+            <p>Experts in Manufacturing & Servicing of High-Quality Inverters and Batteries.</p>
+            <a href="#contact" class="btn">Get a Quote</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <span></span>
+        </div>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="Images/AUREEMASLOGO.JPG" alt="Aureemas Workshop">
+            </div>
+            <div class="about-text">
+                <h3>Committed to Excellence in Electronics</h3>
+                <p>Welcome to <strong>Aureemas Electricals & Electronics</strong>. We are a dedicated team of professionals specializing in power solutions. With years of experience in the industry, we pride ourselves on delivering robust energy solutions tailored to domestic and industrial needs.</p>
+                <p>Our core expertise lies in the manufacturing of custom inverters and battery systems, as well as providing top-tier servicing for all major brands. We believe in quality, durability, and customer satisfaction.</p>
+                
+                <div class="iso-badge">
+                    <span>🏆</span> An ISO 9001:2008 Certified Company
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Products & Services</h2>
+                <span></span>
+            </div>
+            <div class="service-grid">
+                <div class="card">
+                    <span class="icon">⚙</span>
+                    <h3>Inverter Manufacturing</h3>
+                    <p>Custom-built inverters designed for high efficiency and longevity. We manufacture standard pure sine wave inverters suited for homes and businesses.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🔋</span>
+                    <h3>Battery Manufacturing</h3>
+                    <p>We manufacture high-performance tubular batteries designed for deep discharge cycles. Built for Indian power conditions to ensure long backup and durability.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">💾</span>
+                    <h3>PCB Assembling</h3>
+                    <p>Professional Printed Circuit Board (PCB) assembly services. We provide precision soldering, component mounting,for custom electronics.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🛠</span>
+                    <h3>Repair & Maintenance</h3>
+                    <p>Expert troubleshooting and repair for all brands of inverters, UPS systems, and stabilizers. We ensure quick service with genuine spare parts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="container">
+        <div class="section-title">
+            <h2>Our Work</h2>
+            <span></span>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <video controls>
+                    <source src="Videos/WhatsApp Video 2026-02-20 at 11.47.44 AM.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="gallery-item">
+                <video controls>
+                    <source src="Videos/WhatsApp Video 2026-02-20 at 11.49.08 AM.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="gallery-item"><img src="Images/Inverter-assembly.jpg" alt="Inverter Assembly"></div>
+            <div class="gallery-item"><img src="Images/tubular-batteries.jpg" alt="Battery Installation"></div>
+            <div class="gallery-item"><img src="Images/PCB repair.jpg" alt="PCB Repair"></div>
+            <div class="gallery-item"><img src="Images/INVERTER.png" alt="Finished Product"></div>
+            <div class="gallery-item"><img src="Images/BATTERY.png" alt="Finished Product"></div>
+        </div>
+    </section>
+
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-title">
+                <h2>Valued Customers</h2>
+                <span></span>
+            </div>
+            <div class="clients-grid">
+                
+                <div class="client-box">
+                    <img src="Images/mes.avif" alt="MES College" class="client-logo">
+                    <div class="client-name">MES ARTS & SCIENCE COLLEGE<br>MALAPARAMBA</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/Cholayil-poly.avif" alt="Cholayil Polyclinic" class="client-logo">
+                    <div class="client-name">CHOLAYIL POLYCLINIC<br>KARIKALLATHANI</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/court.jpg" alt="Batminton Court" class="client-logo">
+                    <div class="client-name">CHOLAYIL BATMINTON COURT<br>THODUKAPPU</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/college-sheik.jpg" alt="Sheikh Fareed College" class="client-logo">
+                    <div class="client-name">SHEIKH FAREED AULIYA DA'WA COLLEGE<br>ODAMALA</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/iqra.avif" alt="Iqra Dental Clinic" class="client-logo">
+                    <div class="client-name">IQRA DENTAL CLINIC<br>KARIKALLATHANI</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/inthings.jpg" alt="Inthings Technologies" class="client-logo">
+                    <div class="client-name">INTHINGS TECHNOLOGIES<br>KARIKALLATHANI</div>
+                </div>
+
+                <div class="client-box">
+                    <img src="Images/topup.jpg" alt="Topup Mobiles" class="client-logo">
+                    <div class="client-name">TOPUP MOBILES<br>KARIKALLATHANI</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <span></span>
+            </div>
+            <div class="contact-container">
+                <div class="contact-card">
+                    <h3>📍 Visit Us</h3>
+                    <p>Karikallathani, Thazhekode(PO)<br>Malappuram, Kerala, 679341</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Aureemas+Electricals+Karikallathani" target="_blank" class="contact-btn">Locate on Maps</a>
+                </div>
+                <div class="contact-card">
+                    <h3>📞 Call Us</h3>
+                    <p>+91 98955 45696</p>
+                    <a href="https://wa.me/919895545696" target="_blank" class="contact-btn">Chat on WhatsApp</a>
+                </div>
+                <div class="contact-card">
+                    <h3>✉️ Email</h3>
+                    <p>aureemas2011@gmail.com</p>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aureemas2011@gmail.com" target="_blank" class="contact-btn">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Aureemas Electricals & Electronics. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
