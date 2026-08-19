@@ -24,6 +24,7 @@
             padding: 0;
             line-height: 1.6;
             color: var(--text-dark);
+            scroll-behavior: smooth;
         }
 
         a { text-decoration: none; color: inherit; }
@@ -127,6 +128,9 @@
             border-radius: 5px;
             font-weight: bold;
             transition: 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
         }
         .btn:hover { background: #e0a800; }
 
@@ -136,7 +140,7 @@
         .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 10px; }
         .section-title span { display: block; width: 60px; height: 4px; background: var(--secondary-color); margin: auto; }
 
-        /* --- UPDATED: About Section Styles --- */
+        /* --- About Section Styles --- */
         .about-content { 
             display: flex; 
             flex-wrap: wrap; 
@@ -152,7 +156,7 @@
         .about-image img { 
             width: 100%; 
             border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Softer shadow */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .about-text { 
@@ -160,7 +164,6 @@
             min-width: 300px;
         }
 
-        /* Style for the ISO Badge */
         .iso-badge {
             display: inline-flex;
             align-items: center;
@@ -265,36 +268,263 @@
             text-align: center; 
         }
 
-        .contact-card {
+        .contact-card { 
             background: rgba(255, 255, 255, 0.1); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
-            padding: 30px 20px;
-            border-radius: 12px;
+            padding: 30px 20px; 
+            border-radius: 12px; 
             width: 300px; 
-            transition: 0.3s ease;
+            transition: 0.3s ease; 
         }
 
-        .contact-card:hover {
+        .contact-card:hover { 
             transform: translateY(-5px); 
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.15); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
         }
 
         .contact-card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--secondary-color); }
         .contact-card p { font-size: 1rem; margin-bottom: 20px; color: #eee; }
 
-        .contact-btn {
-            display: inline-block;
-            padding: 8px 15px;
-            border: 1px solid var(--secondary-color);
-            color: var(--secondary-color);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: 0.3s;
+        .contact-btn { 
+            display: inline-block; 
+            padding: 8px 15px; 
+            border: 1px solid var(--secondary-color); 
+            color: var(--secondary-color); 
+            border-radius: 20px; 
+            font-size: 0.9rem; 
+            transition: 0.3s; 
         }
         .contact-btn:hover { background: var(--secondary-color); color: var(--text-dark); }
 
         footer { background: #1a1c52; color: #ccc; text-align: center; padding: 20px 0; font-size: 0.9rem; }
+
+        /* ================= FLOATING CHAT WIDGET STYLES ================= */
+        .floating-chat-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 99999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Launcher Bubble Button */
+        .chat-launcher-btn {
+            background: var(--primary-color);
+            color: #ffffff;
+            border: 2px solid var(--secondary-color);
+            border-radius: 50px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .chat-launcher-btn:hover {
+            transform: scale(1.05);
+            background: #232570;
+        }
+
+        .chat-launcher-icon {
+            font-size: 20px;
+        }
+
+        /* Floating Chat Popup Window */
+        .chat-popup {
+            position: absolute;
+            bottom: 65px;
+            right: 0;
+            width: 360px;
+            max-width: calc(100vw - 40px);
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #e2e8f0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: bottom right;
+        }
+
+        .chat-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .chat-header {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .chat-header p {
+            margin: 2px 0 0;
+            font-size: 0.75rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .close-chat-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            line-height: 1;
+            opacity: 0.8;
+            transition: 0.2s;
+        }
+
+        .close-chat-btn:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .chat-body {
+            padding: 16px;
+            height: 280px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f8fafc;
+        }
+
+        .chat-msg {
+            padding: 10px 14px;
+            border-radius: 12px;
+            max-width: 85%;
+            font-size: 0.88rem;
+            line-height: 1.4;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .bot-msg {
+            background: #e2e8f0;
+            color: #1e293b;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .user-msg {
+            background: var(--primary-color);
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 10px 12px;
+            background: #ffffff;
+            border-top: 1px solid #e2e8f0;
+            gap: 8px;
+        }
+
+        .chat-footer input {
+            flex: 1;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .chat-footer input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .chat-footer button {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .chat-footer button:hover {
+            background: #232570;
+        }
+
+        .wa-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #25d366;
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-top: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.25);
+        }
+
+        .wa-action-btn:hover {
+            background: #1eb956;
+            color: #fff;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* --- Mobile Responsive --- */
         @media (max-width: 768px) {
@@ -305,9 +535,17 @@
             .company-name h1 { font-size: 1.1rem; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
             .hero h1 { font-size: 2rem; }
-            /* About Section Stack on Mobile */
             .about-content { flex-direction: column; }
             .about-image, .about-text { width: 100%; }
+
+            .floating-chat-container {
+                bottom: 15px;
+                right: 15px;
+            }
+            .chat-popup {
+                width: calc(100vw - 30px);
+                right: 0;
+            }
         }
     </style>
 </head>
@@ -329,6 +567,7 @@
                     <li><a href="#services">Services</a></li>
                     <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#clients">Clients</a></li>
+                    <li><a href="javascript:void(0)" onclick="openChat()">Enquiry</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -339,7 +578,7 @@
         <div>
             <h1>Powering Your World Reliably</h1>
             <p>Experts in Manufacturing & Servicing of High-Quality Inverters and Batteries.</p>
-            <a href="#contact" class="btn">Get a Quote</a>
+            <button onclick="openChat()" class="btn">Get a Quote</button>
         </div>
     </section>
 
@@ -396,6 +635,7 @@
                     <h3>Solar Power Systems & Installation</h3>
                     <p>Complete on-grid and off-grid solar rooftop solutions engineered for maximum energy generation. From site inspection to system integration, we provide clean, reliable power for homes and businesses.</p>
                 </div>
+            </div>
         </div>
     </section>
 
@@ -433,7 +673,6 @@
                 <span></span>
             </div>
             <div class="clients-grid">
-                
                 <div class="client-box">
                     <img src="Images/mes.avif" alt="MES College" class="client-logo">
                     <div class="client-name">MES ARTS & SCIENCE COLLEGE<br>MALAPARAMBA</div>
@@ -468,7 +707,6 @@
                     <img src="Images/topup.jpg" alt="Topup Mobiles" class="client-logo">
                     <div class="client-name">TOPUP MOBILES<br>KARINKALLATHANI</div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -503,5 +741,156 @@
         <p>© 2026 Aureemas Electricals & Electronics. All Rights Reserved.</p>
     </footer>
 
+    <!-- ================= FLOATING CHATBOT WIDGET ================= -->
+    <div class="floating-chat-container">
+        
+        <!-- Floating Launcher Button -->
+        <button class="chat-launcher-btn" id="chatLauncher" onclick="toggleChat()">
+            <span class="chat-launcher-icon">⚡</span>
+            <span>Enquiry</span>
+        </button>
+
+        <!-- Popup Chat Window -->
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="chat-avatar">⚡</div>
+                    <div>
+                        <h3>Aureemas Assistant</h3>
+                        <p><span class="pulse-dot"></span> Online | Quick Response</p>
+                    </div>
+                </div>
+                <button class="close-chat-btn" onclick="toggleChat()" title="Close chat">✕</button>
+            </div>
+
+            <div class="chat-body" id="chatBody">
+                <div class="chat-msg bot-msg">
+                    Hello! Welcome to <strong>Aureemas Electricals</strong>. May I know your <strong>Full Name</strong>?
+                </div>
+            </div>
+
+            <form id="chatForm" class="chat-footer" onsubmit="handleEnquirySubmit(event)">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Type your name here..." 
+                    autocomplete="off" 
+                    required
+                />
+                <button type="submit" id="sendBtn">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= FLOATING CHAT & GOOGLE SHEETS LOGIC ================= -->
+    <script>
+        let currentStep = 1;
+        const enquiryLead = {
+            name: "",
+            phone: "",
+            message: ""
+        };
+
+        const COMPANY_WHATSAPP = "919895545696";
+
+        // >>> PASTE YOUR COPIED GOOGLE APPS SCRIPT URL HERE <<<
+        const GOOGLE_SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbzG9AyjsWTr7i28AROSvYvwd5U4qIQwAtJGEIRVP1zIbhjnYLW13iBOdfT9USmRnDil/exec"; 
+
+        function toggleChat() {
+            const popup = document.getElementById("chatPopup");
+            popup.classList.toggle("active");
+            if (popup.classList.contains("active")) {
+                setTimeout(() => {
+                    document.getElementById("chatInput").focus();
+                }, 200);
+            }
+        }
+
+        function openChat() {
+            const popup = document.getElementById("chatPopup");
+            if (!popup.classList.contains("active")) {
+                popup.classList.add("active");
+            }
+            setTimeout(() => {
+                document.getElementById("chatInput").focus();
+            }, 200);
+        }
+
+        function addChatMessage(content, sender = "bot", isHtml = false) {
+            const chatBody = document.getElementById("chatBody");
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `chat-msg ${sender}-msg`;
+            
+            if (isHtml) {
+                msgDiv.innerHTML = content;
+            } else {
+                msgDiv.textContent = content;
+            }
+            
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function handleEnquirySubmit(e) {
+            e.preventDefault();
+            const input = document.getElementById("chatInput");
+            const value = input.value.trim();
+            if (!value) return;
+
+            addChatMessage(value, "user");
+            input.value = "";
+
+            if (currentStep === 1) {
+                enquiryLead.name = value;
+                currentStep = 2;
+                setTimeout(() => {
+                    addChatMessage(`Great to meet you, ${enquiryLead.name}! Please provide your Phone Number so our team can reach you.`);
+                    input.placeholder = "Enter 10-digit phone number...";
+                    input.type = "tel";
+                }, 450);
+
+            } else if (currentStep === 2) {
+                enquiryLead.phone = value;
+                currentStep = 3;
+                setTimeout(() => {
+                    addChatMessage("Thank you! What product or service are you inquiring about (Inverters, Batteries, Solar, or Repairs)?");
+                    input.placeholder = "Describe your requirement...";
+                    input.type = "text";
+                }, 450);
+
+            } else if (currentStep === 3) {
+                enquiryLead.message = value;
+                currentStep = 4;
+                document.getElementById("chatForm").style.display = "none";
+
+                // Push submission data straight to your Google Sheet
+                if (GOOGLE_SHEET_WEBHOOK_URL && GOOGLE_SHEET_WEBHOOK_URL !== "PASTE_YOUR_COPIED_WEB_APP_URL_HERE") {
+                    fetch(GOOGLE_SHEET_WEBHOOK_URL, {
+                        method: "POST",
+                        mode: "no-cors",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(enquiryLead)
+                    }).catch(err => console.error("Webhook submission error:", err));
+                }
+
+                setTimeout(() => {
+                    const waMessage = encodeURIComponent(
+                        `*New Website Enquiry - Aureemas*\n\n` +
+                        `👤 *Name:* ${enquiryLead.name}\n` +
+                        `📞 *Phone:* ${enquiryLead.phone}\n` +
+                        `📝 *Requirement:* ${enquiryLead.message}`
+                    );
+                    const waLink = `https://wa.me/${COMPANY_WHATSAPP}?text=${waMessage}`;
+
+                    const confirmationHtml = `
+                        Thank you, <strong>${enquiryLead.name}</strong>! Your details have been submitted.<br><br>
+                        Click below to instantly connect with our engineer on WhatsApp:<br>
+                        <a href="${waLink}" target="_blank" class="wa-action-btn">💬 Chat Directly on WhatsApp</a>
+                    `;
+                    addChatMessage(confirmationHtml, "bot", true);
+                }, 500);
+            }
+        }
+    </script>
 </body>
 </html>
